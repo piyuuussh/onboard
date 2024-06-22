@@ -4,8 +4,10 @@ import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:onboard/core/constants/AppColors.dart';
 import 'package:onboard/model/datasource/MapScreen.dart';
+import 'package:onboard/model/providers/languageProvider.dart';
 import 'package:onboard/view/screens/ChatBot.dart';
 import 'package:onboard/view/widgets/Textfield.dart';
+import 'package:provider/provider.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
@@ -20,6 +22,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var langCode = Provider.of<LanguageProvider>(context).langCode;
     return Scaffold(
       appBar: AppBar(
         title: const Row(

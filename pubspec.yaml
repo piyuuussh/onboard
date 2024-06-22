@@ -20,6 +20,7 @@ dependencies:
   http: ^1.2.1
   dash_chat_2: ^0.0.21
   flutter_gemini: ^2.0.4
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
