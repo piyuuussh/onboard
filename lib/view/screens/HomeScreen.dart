@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:onboard/core/constants/AppColors.dart';
 import 'package:onboard/model/datasource/MapScreen.dart';
+import 'package:onboard/view/screens/ChatBot.dart';
 import 'package:onboard/view/widgets/Textfield.dart';
 
 class MyHomeScreen extends StatefulWidget {
@@ -54,6 +55,14 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ChatBot()),
+          );
+        },
+        child: const Icon(Icons.chat_bubble_outline_outlined),
       ),
       body: SingleChildScrollView(
         child: Padding(
