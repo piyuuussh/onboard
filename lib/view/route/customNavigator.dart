@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onboard/view/route/appPages.dart';
 import 'package:onboard/view/screens/HomeScreen.dart';
+import 'package:onboard/view/screens/langSelector.dart';
 import 'package:onboard/view/screens/loginScreen.dart';
 import 'package:onboard/view/screens/signupScreen.dart';
 import 'package:onboard/view/screens/splashScreen.dart';
@@ -13,6 +14,11 @@ class CustomNavigator {
       case AppPages.appEntry:
         return MaterialPageRoute(
           builder: (context) => SplashScreen(),
+          settings: settings,
+        );
+        case AppPages.langSelector:
+        return MaterialPageRoute(
+          builder: (context) => langSelector(),
           settings: settings,
         );
       case AppPages.login:

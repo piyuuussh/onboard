@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:onboard/core/constants/AppColors.dart';
 import 'package:onboard/model/datasource/authmethods.dart';
+import 'package:onboard/model/providers/languageProvider.dart';
 import 'package:onboard/view/route/appPages.dart';
 import 'package:onboard/view/route/customNavigator.dart';
 import 'package:onboard/view/widgets/Textfield.dart';
+import 'package:provider/provider.dart';
 
 class loginScreen extends StatefulWidget {
   loginScreen({super.key});
@@ -28,9 +30,21 @@ class _loginScreenState extends State<loginScreen> {
       ));
     }
   }
+  String controlStatement(var langCode,String eng,String hindi,String marathi){
+    if(langCode==0){
+      return eng;
+    }
+    else if(langCode==1){
+      return hindi;
+    }
+    else{
+      return marathi;
+    }
 
+  }
   @override
   Widget build(BuildContext context) {
+    var langCode = Provider.of<LanguageProvider>(context).langCode;
     return Scaffold(
         body: Container(
       width: double.infinity,
@@ -55,8 +69,8 @@ class _loginScreenState extends State<loginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Welcome Back!",
+                    Text(
+                      controlStatement(langCode,"Welcome Back!","वापसी पर स्वागत है!","परत आपले स्वागत आहे!"),
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -66,9 +80,9 @@ class _loginScreenState extends State<loginScreen> {
                       height: 20,
                     ),
                     TextFieldController(
-                      hinttext: "Enter Email Address",
+                      hinttext: controlStatement(langCode,"Enter Email Address","ईमेल पता दर्ज करें","ईमेल पत्ता प्रविष्ट करा"),
                       textEditingController: emailController,
-                      labeltext: "Email",
+                      labeltext: controlStatement(langCode,"Email","ईमेल","ईमेल"),
                       textInputType: TextInputType.emailAddress,
                       prefixIcon: const Icon(Icons.email),
                       borderRadius: 10,
@@ -78,9 +92,9 @@ class _loginScreenState extends State<loginScreen> {
                       height: 10,
                     ),
                     TextFieldController(
-                      hinttext: "Enter Password",
+                      hinttext: controlStatement(langCode,"Enter Password","पासवर्ड दर्ज करें","संकेतशब्द प्रविष्ट करा"),
                       textEditingController: passwordController,
-                      labeltext: "Password",
+                      labeltext: controlStatement(langCode,"Password","पासवर्ड","संकेतशब्द"),
                       textInputType: TextInputType.visiblePassword,
                       prefixIcon: const Icon(Icons.lock),
                       borderRadius: 10,
@@ -97,8 +111,8 @@ class _loginScreenState extends State<loginScreen> {
                           borderRadius: BorderRadius.circular(10)),
                       child: TextButton(
                           onPressed: () => loginUser(),
-                          child: const Text(
-                            "Login",
+                          child: Text(
+                            controlStatement(langCode,"Login","लॉग इन करें","लॉग इन करा"),
                             style: TextStyle(color: Colors.white),
                           )),
                     ),
@@ -108,12 +122,14 @@ class _loginScreenState extends State<loginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don't have an account?"),
+                        Text(
+                          controlStatement(langCode,"Don't have an account?","खाता नहीं है?","खाते नाही?"),
+                          ),
                         TextButton(
                             onPressed: () => CustomNavigator.pushReplace(
                                 context, AppPages.register),
-                            child: const Text(
-                              "Register",
+                            child: Text(
+                              controlStatement(langCode,"Register","रजिस्टर करें","नोंदणी करा"),
                               style: TextStyle(color: Colors.blue),
                             ))
                       ],

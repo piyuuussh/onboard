@@ -59,6 +59,19 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
     _busStopsFuture = loadBusStops();
   }
 
+  String controlStatement(var langCode,String eng,String hindi,String marathi){
+    if(langCode==0){
+      return eng;
+    }
+    else if(langCode==1){
+      return hindi;
+    }
+    else{
+      return marathi;
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<BusStops>>(
@@ -75,7 +88,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
           _busStops = snapshot.data!;
 
           var langCode = Provider.of<LanguageProvider>(context).langCode;
-    return Scaffold(
+          return Scaffold(
             appBar: AppBar(
               title: const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -112,14 +125,14 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => ChatBot()),
-          );
-        },
-        child: const Icon(Icons.chat_bubble_outline_outlined),
-      ),
-      body: SingleChildScrollView(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ChatBot()),
+                );
+              },
+              child: const Icon(Icons.chat_bubble_outline_outlined),
+            ),
+            body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -127,8 +140,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                   children: [
                     Container(
                       width: 200,
-                      child: const Text(
-                        "Where do you want to go?",
+                      child: Text(
+                        langCode == 0 ? "Where do you want to go?" : langCode==1?"आप कहाँ जाना चाहते हैं?":"तुम्हाला कुठे जायचे आहे?",
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -162,10 +175,10 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                                   controller: SourceController,
                                   keyboardType: TextInputType.text,
                                   onChanged: OnSourceSearch,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                       contentPadding: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 15),
-                                      hintText: "Source",
+                                      hintText: controlStatement(langCode, "Source", "स्रोत", "स्त्रोत"),
                                       hintStyle:
                                           TextStyle(color: AppColors.black),
                                       focusColor: AppColors.black,
@@ -207,10 +220,10 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                                   controller: DestinationController,
                                   keyboardType: TextInputType.text,
                                   onChanged: OnDestinationSearch,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                       contentPadding: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 15),
-                                      hintText: "Destination",
+                                      hintText: controlStatement(langCode, "Destination", "गंतव्य", "गंतव्यस्थान"),
                                       hintStyle:
                                           TextStyle(color: AppColors.black),
                                       focusColor: AppColors.black,
@@ -261,8 +274,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                           borderRadius: BorderRadius.circular(10)),
                       child: TextButton(
                           onPressed: () {},
-                          child: const Text(
-                            "Lets Go",
+                          child: Text(
+                            controlStatement(langCode, "Let's Go", "चल", "चला"),
                             style: TextStyle(color: Colors.white),
                           )),
                     ),
@@ -290,8 +303,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                               ),
                               child: TextButton(
                                 onPressed: () {},
-                                child: const Text(
-                                  "Optimal Distance",
+                                child: Text(
+                                  controlStatement(langCode,"Optimal Distance","इष्टतम दूरी","इष्टतम अंतर"),
                                   style: TextStyle(color: AppColors.black),
                                 ),
                               )),
@@ -306,19 +319,16 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                               ),
                               child: TextButton(
                                 onPressed: () {},
-                                child: const Text(
-                                  "Total Fare",
+                                child: Text(
+                                  controlStatement(langCode,"Total Fare","कुल किराया","एकूण भाडे"),
                                   style: TextStyle(color: AppColors.black),
                                 ),
                               )),
                           SizedBox(height: 20),
                           if (sourcestop != null)
-                            Text('Selected Bus Stop 1: ${sourcestop!.name}, '
-                                'Lat: ${sourcestop!.latitude}, Lng: ${sourcestop!.longitude}'),
+                            Text(controlStatement(langCode,'Selected Bus Stop 1: ${sourcestop!.name}, Lat: ${sourcestop!.latitude}, Lng: ${sourcestop!.longitude}',"चयनित बस स्टॉप 1: ${sourcestop!.name}, अक्षांश: ${sourcestop!.latitude}, रेखांश: ${sourcestop!.longitude}","निवडलेला बस स्टॉप १: ${sourcestop!.name}, अक्षांश: ${sourcestop!.latitude}, रेखांश: ${sourcestop!.longitude}")),
                           if (destinationstop != null)
-                            Text(
-                                'Selected Bus Stop 2: ${destinationstop!.name}, '
-                                'Lat: ${destinationstop!.latitude}, Lng: ${destinationstop!.longitude}'),
+                            Text(controlStatement(langCode,'Selected Bus Stop 1: ${destinationstop!.name}, Lat: ${destinationstop!.latitude}, Lng: ${destinationstop!.longitude}',"चयनित बस स्टॉप 1: ${destinationstop!.name}, अक्षांश: ${destinationstop!.latitude}, रेखांश: ${destinationstop!.longitude}","निवडलेला बस स्टॉप १: ${destinationstop!.name}, अक्षांश: ${destinationstop!.latitude}, रेखांश: ${destinationstop!.longitude}")),
                         ],
                       ),
                     )
