@@ -4,10 +4,12 @@ import 'package:onboard/firebase_options.dart';
 import 'package:onboard/view/route/appPages.dart';
 import 'package:onboard/view/route/customNavigator.dart';
 import 'package:onboard/view/screens/HomeScreen.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Gemini.init(apiKey: "AIzaSyBBwbwn_EzGEZRvvshVDTNdkXvxyN0MLSU");
   runApp(const MyApp());
 }
 

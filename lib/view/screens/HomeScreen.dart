@@ -6,7 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:onboard/core/constants/AppColors.dart';
 import 'package:onboard/model/datasource/MapScreen.dart';
+import 'package:onboard/model/providers/languageProvider.dart';
+import 'package:onboard/view/screens/ChatBot.dart';
 import 'package:onboard/model/model/BusStops.dart';
+import 'package:provider/provider.dart';
 
 class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
@@ -71,7 +74,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
           _busStops = snapshot.data!;
 
-          return Scaffold(
+          var langCode = Provider.of<LanguageProvider>(context).langCode;
+    return Scaffold(
             appBar: AppBar(
               title: const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -107,7 +111,15 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 ],
               ),
             ),
-            body: SingleChildScrollView(
+            floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ChatBot()),
+          );
+        },
+        child: const Icon(Icons.chat_bubble_outline_outlined),
+      ),
+      body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
