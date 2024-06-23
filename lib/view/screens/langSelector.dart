@@ -3,6 +3,7 @@ import 'package:onboard/model/providers/languageProvider.dart';
 import 'package:onboard/view/route/appPages.dart';
 import 'package:onboard/view/route/customNavigator.dart';
 import 'package:provider/provider.dart';
+
 class langSelector extends StatefulWidget {
   const langSelector({super.key});
 
@@ -33,7 +34,7 @@ class _langSelectorState extends State<langSelector> {
                   onPressed: () {
                     Provider.of<LanguageProvider>(context, listen: false)
                         .setLangCode(0);
-                    CustomNavigator.pushReplace(context, AppPages.login);
+                    CustomNavigator.pushReplace(context, AppPages.home);
                   },
                   child: const Text('English'),
                 ),
@@ -41,7 +42,7 @@ class _langSelectorState extends State<langSelector> {
                   onPressed: () {
                     Provider.of<LanguageProvider>(context, listen: false)
                         .setLangCode(1);
-                    CustomNavigator.pushReplace(context, AppPages.login);
+                    CustomNavigator.pushReplace(context, AppPages.home);
                   },
                   child: const Text('Hindi'),
                 ),
@@ -49,7 +50,7 @@ class _langSelectorState extends State<langSelector> {
                   onPressed: () {
                     Provider.of<LanguageProvider>(context, listen: false)
                         .setLangCode(2);
-                    CustomNavigator.pushReplace(context, AppPages.login);
+                    CustomNavigator.pushReplace(context, AppPages.home);
                   },
                   child: const Text('Marathi'),
                 ),

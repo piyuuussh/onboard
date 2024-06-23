@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LanguageProvider extends ChangeNotifier {
-  var _langCode=0;
+  var _langCode = 0;
 
   dynamic get langCode => _langCode;
 
